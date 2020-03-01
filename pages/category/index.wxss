@@ -1,29 +1,49 @@
 /* 如果同时设置了top和bottom，该元素的高度取两个的距离 */
-.content{
-    position: fixed;
-    top: 100rpx;
-    bottom: 0;
-    width: 750rpx;
-    display: flex;
-    justify-content: space-between
+
+.content {
+  position: fixed;
+  top: 100rpx;
+  bottom: 0;
+  width: 750rpx;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* 左边的菜单 */
-.left{
-    width: 200rpx;
-    height: 100%;
-    background: #eee;
-    overflow: auto;
+
+.left {
+  width: 200rpx;
+  height: 100%;
+  background: #eee;
+  overflow: auto;
 }
 
-.left .menu-item{
-    text-align: center;
-    padding: 20rpx 0;
-    border-bottom: 1px #ddd solid;
+.left .menu-item {
+  position: relative;
+  text-align: center;
+  padding: 20rpx 0;
+  border-bottom: 1px #ddd solid;
 }
 
 /* 右边的内容 */
 
-.right image{
-    width: 100rpx;
+.right image {
+  width: 100rpx;
+}
+
+.active {
+  color: red;
+  background: #fff;
+}
+
+.active::before {
+  display: block;
+  content: "";
+  width: 2px;
+  height: 16px;
+  background: red;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-8px);
 }
