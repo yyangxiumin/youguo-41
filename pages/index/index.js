@@ -5,7 +5,10 @@ Page({
     // 轮播图的数据
     banners: [],
     // 菜单数组
-    menus: []
+    menus: [],
+    // 楼层数据
+    floors: [],
+    isShowTop: false
   },
 
   onLoad() {
@@ -44,6 +47,21 @@ Page({
       this.setData({
         menus: newData
       })
+    })
+    request({
+      url: "/home/floordata"
+    }).then( res =>{
+      const {message} = res.data
+      this.setData({
+        floors: message
+      })
+    })
+  },
+  // 小程序回到顶部
+  handleToTop() {
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
     })
   }
 })
