@@ -9,7 +9,7 @@
       <!-- 菜单的子选项 -->
       <block wx:for="{{ list }}" wx:key="index">
         <view class="menu-item {{ current === index ? 'active' : '' }}" bindtap="handleClick" data-index="{{index}}">
-           {{item.cat_name}}
+          {{item.cat_name}}
         </view>
       </block>
     </view>
@@ -28,7 +28,7 @@
             <!-- 品牌分类列表 -->
             <block wx:for="{{ item.children }}" wx:key="index" wx:for-item="subItem" wx:for-index="subIndex">
               <navigator url="">
-                <image mode="widthFix" src="{{ subItem.cat_icon }}"></image>
+                <image mode="aspectFill" src="{{ subItem.cat_icon }}"></image>
                 <view>{{ subItem.cat_name }}</view>
               </navigator>
             </block>
