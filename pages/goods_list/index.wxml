@@ -1,9 +1,9 @@
 <view class="container">
-  <!-- 头部搜索栏 -->
+  <!-- 顶部搜索栏 -->
   <navigator url="">
     <view class="search">
       <view class="search-input">
-        <icon type="search" size="20" /> 小米
+        <icon type="search" size="20" /> {{keyword}}
       </view>
     </view>
   </navigator>
