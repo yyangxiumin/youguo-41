@@ -11,7 +11,8 @@ Page({
     // 商品的列表
     goods: [],
     // 是否有更多
-    hasMoer: true
+    hasMoer: true,
+    pagenum: 1
   },
 
   /**
@@ -25,12 +26,20 @@ Page({
       keyword
     });
 
+    // 请求商品列表数据
+    this.getGoods();
+
+
+  },
+  getGoods() {
     setTimeout(v => {
       // 请求商品列表
       request({
         url: "/goods/search",
         data: {
           query: this.data.keyword,
+          pagenum: this.data.pagenum,
+          pagesize: 10
         }
       }).then(res => {
         // console.log(res)
@@ -43,12 +52,20 @@ Page({
         })
         // 把message商品添加带list
         this.setData({
-          goods
+          // 合并原来的列表和新请求回来的商品列表
+          goods: [...this.data.goods, ...goods]
         })
       })
-    }, 3000)
-
+    }, 2000)
   },
-
+  // 页面上拉触底时候触发
+  onReachBottom() {
+    // 页数加1
+    this.setData({
+      pagenum: this.data.pagenum + 1
+    });
+    // 请求商品列表
+    this.getGoods();
+  }
 
 })
