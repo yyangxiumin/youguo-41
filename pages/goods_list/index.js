@@ -12,7 +12,9 @@ Page({
     goods: [],
     // 是否有更多
     hasMoer: true,
-    pagenum: 1
+    pagenum: 1,
+    // 是否正在加载
+    loading: true
   },
 
   /**
@@ -32,6 +34,10 @@ Page({
 
   },
   getGoods() {
+    // 如果没有更多了，就不会再请求
+    if (this.data.hasMore == false) {
+      return;
+    }
     setTimeout(v => {
       // 请求商品列表
       request({
@@ -53,19 +59,34 @@ Page({
         // 把message商品添加带list
         this.setData({
           // 合并原来的列表和新请求回来的商品列表
-          goods: [...this.data.goods, ...goods]
-        })
+          goods: [...this.data.goods, ...goods],
+          // 当前这次请求完毕
+          loading: false
+        });
+
+        // 判断是否是最后一页
+        if (this.data.goods.length >= message.total) {
+          this.setData({
+            hasMore: false
+          })
+        }
       })
     }, 2000)
   },
   // 页面上拉触底时候触发
   onReachBottom() {
     // 页数加1
-    this.setData({
-      pagenum: this.data.pagenum + 1
-    });
-    // 请求商品列表
-    this.getGoods();
-  }
+    // 需要等到上一次的请求回来了再执行下一页的数据
+    if (this.data.loading === false) {
 
+      this.setData({
+        // 每次发起请求前重新设置loadig为正在加载
+        loading: true,
+        // 页数加1
+        pagenum: this.data.pagenum + 1
+      });
+      // 请求商品列表
+      this.getGoods();
+    }
+  }
 })
