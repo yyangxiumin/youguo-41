@@ -1,9 +1,12 @@
 /* 如果同时设置了top和bottom，该元素的高度取两个的距离 */
 
 .content {
-  position: absolute;
+  /*position: absolute;
   top: 100rpx;
-  bottom: 0;
+  bottom: 0;*/
+  
+  /* calc函数的文档：https://www.runoob.com/cssref/func-calc.html */
+  height: calc(100vh - 100rpx);
   width: 750rpx;
   display: flex;
   justify-content: space-between;
@@ -15,7 +18,7 @@
   width: 200rpx;
   height: 100%;
   background: #eee;
-  overflow: auto;
+  /* overflow: auto; */
   flex-shrink: 0;
 }
 
