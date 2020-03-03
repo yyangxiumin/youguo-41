@@ -15,20 +15,29 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   // 监听输入框的输入事件
   handleInput(e) {
     // value是输入框的值
-    const { value } = e.detail;
+    const {
+      value
+    } = e.detail;
     this.setData({
       inputValue: value
     });
 
     // 如果value有值才发起请求
-    if (!value) return;
+    if (!value) {
+      // 把搜索建议的数组清空
+      this.setData({
+        recommend: []
+      });
+
+      return;
+    };
 
     // 请求搜索建议
     request({
@@ -37,11 +46,21 @@ Page({
         query: value
       }
     }).then(res => {
-      const { message } = res.data;
+      const {
+        message
+      } = res.data;
       // 保存到搜索建议的数组
       this.setData({
         recommend: message
       })
+    })
+  },
+  // 点击取消按钮时候触发的事件
+  handleCancel() {
+    // 清空输入框的值和搜索建议的列表
+    this.setData({
+      inputValue: "",
+      recommend: ""
     })
   }
 })
