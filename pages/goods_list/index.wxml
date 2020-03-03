@@ -1,12 +1,14 @@
 <view class="container">
   <!-- 顶部搜索栏 -->
-  <navigator url="">
-    <view class="search">
-      <view class="search-input">
-        <icon type="search" size="20" /> {{keyword}}
-      </view>
+  <!-- <navigator url=""> -->
+  <view class="search">
+    <view class="search-input">
+      <icon type="search" size="20" /> {{keyword}}
     </view>
-  </navigator>
+  </view>
+  <!-- </navigator> -->
+  <!-- 搜索组件 -->
+  <search keyword="{{keyword}}" background="search" align="left" />
 
   <!-- 中间tab栏的头部 -->
   <view class="tab">
